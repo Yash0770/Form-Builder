@@ -385,6 +385,7 @@
     <script type="text/javascript">
     var jsonElement = document.getElementById('json');
     var formElement = document.getElementById('formio');
+    console.log("formElement>>>>>>>>>>>>",formElement)
     var subJSON = document.getElementById('subjson');
     var builder = null;
     var setDisplay = function(display) {
@@ -412,12 +413,27 @@
           });
         };
     
+        // var onBuild = function(build) {
+        //   jsonElement.innerHTML = '';
+        //   formElement.innerHTML = '';
+        //   jsonElement.appendChild(document.createTextNode(JSON.stringify(instance.schema, null, 4)));
+        //   Formio.createForm(formElement, instance.form).then(onForm);
+        // };
         var onBuild = function(build) {
-          jsonElement.innerHTML = '';
-          formElement.innerHTML = '';
-          jsonElement.appendChild(document.createTextNode(JSON.stringify(instance.schema, null, 4)));
-          Formio.createForm(formElement, instance.form).then(onForm);
-        };
+  jsonElement.innerHTML = '';
+  formElement.innerHTML = '';
+  
+  // Convert the schema to a string
+  var jsonString = JSON.stringify(instance.schema, null, 4);
+  
+  // Store the string in localStorage
+  localStorage.setItem('formSchema', jsonString);
+  
+  // Update the DOM
+  jsonElement.appendChild(document.createTextNode(jsonString));
+  Formio.createForm(formElement, instance.form).then(onForm);
+};
+
     
 
         var onReady = function() {
@@ -443,9 +459,8 @@
     </div>
     
     <script>
-      console.log('demo');
       var iframe = document.getElementById("json");
-      console.log("iframe",iframe);
+      // console.log("iframe",iframe);
   </script>
     
     </body>
