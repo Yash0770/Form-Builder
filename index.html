@@ -31,9 +31,25 @@
   <script>
     document.addEventListener('DOMContentLoaded', (event) => {
             const data = { message: 'Hello from the iframe!' };
+            console.log("data",data);
 
             window.parent.postMessage(data, "http://localhost:3009");
         });
+
+        // 
+        window.addEventListener('DOMContentLoaded', () => {
+    // Find the element with id="json"
+    const jsonElement = document.getElementById('json');
+    console.log("jsonElement",jsonElement);
+    if (jsonElement) {
+      // If the element exists, send its innerHTML or textContent to the parent
+      const dataToSend = {
+        jsonContent: jsonElement.innerHTML // or use .textContent if appropriate
+      };
+      console.log("dataToSend",dataToSend);
+      window.parent.postMessage(dataToSend, "http://localhost:3009"); // Adjust the target origin as necessary
+    }
+  });
   </script>
 </head>
  
@@ -41,7 +57,7 @@
    
     <div class="container-fluid">
       <div class="row">
-      <div class="col-sm-8">
+      <div class="col-sm-12">
         <h3 class="text-center text-muted" id="form-select"> </h3>
         <div id="&quot;formio-67q70f-wrapper&quot;"><div id="builder"><div class="formio builder row formbuilder">
       <div class="col-xs-4 col-sm-3 col-md-2 formcomponents">
@@ -364,12 +380,12 @@
     </div>
     </div><link rel="stylesheet" href="https://formio.github.io/formio.js/dist/formio.embed.css"><script src="https://formio.github.io/formio.js/dist/formio.full.min.js"></script><link rel="stylesheet" href="https://formio.github.io/formio.js/dist/formio.full.min.css"></div>
       </div>
-      <div class="col-sm-4">
+      <!-- <div class="col-sm-4">
         <h3 class="text-center text-muted">JSON Schema</h3>
         <div class="card card-body bg-light jsonviewer">
           <pre id="json"></pre>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="row mt-4">
       <div class="col-sm-8 offset-sm-2">
@@ -441,8 +457,7 @@
   Formio.createForm(formElement, instance.form).then(onForm);
 };
 
-    
-
+  
         var onReady = function() {
           var jsonElement = document.getElementById('json');
           var formElement = document.getElementById('formio');
