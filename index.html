@@ -28,6 +28,16 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="/formio.js/dist/formio.embed.js"></script>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+            // Example data to send
+            const data = { message: 'Hello from the iframe!' };
+
+            // Send message to the parent window
+            // Replace "http://localhost:3000" with the actual origin of your parent page
+            window.parent.postMessage(data, "http://localhost:3009");
+        });
+  </script>
 </head>
  
 <body>
