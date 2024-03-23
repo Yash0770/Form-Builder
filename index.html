@@ -30,11 +30,8 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', (event) => {
-            // Example data to send
             const data = { message: 'Hello from the iframe!' };
 
-            // Send message to the parent window
-            // Replace "http://localhost:3000" with the actual origin of your parent page
             window.parent.postMessage(data, "http://localhost:3009");
         });
   </script>
